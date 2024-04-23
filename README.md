@@ -31,7 +31,7 @@ This package provides an function (`recase`) that allows to convert to and from 
 - snake_case
 - kebab-case
 
-> [!HINT]
+> [!IMPORTANT]
 > All whitespace within the string will be stripped, to allow for a more efficient "word" separation.
 
 ### How do I use it?
