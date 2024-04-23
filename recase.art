@@ -35,29 +35,29 @@ _separated: function [s][
 ;---------------------------
 
 _titleCase: function [s][
-    join map separated s => capitalize
+    join map _separated s => capitalize
 ]
 
 _camelCase: function [s][
-    join map.with:'i separated s 'x [
+    join map.with:'i _separated s 'x [
         (i=0)? -> x
                -> capitalize x
     ]
 ]
 
 _snakeCase: function [s][
-    join.with:"_" separated s
+    join.with:"_" _separated s
 ]
 
 _kebabCase: function [s][
-    join.with:"-" separated s
+    join.with:"-" _separated s
 ]
 
 ;---------------------------
 ; Public methods
 ;---------------------------
 
-recase: function [str][
+recase: function [str :string][
     ret: str
 
     unless null? attr 'title -> ret: _titleCase ret
