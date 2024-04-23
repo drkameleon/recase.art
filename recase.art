@@ -58,6 +58,21 @@ _kebabCase: function [s][
 ;---------------------------
 
 recase: function [str :string][
+    ;; description: « convert case of given string
+    ;; options: [
+    ;;      title: « convert to TitleCase
+    ;;      camel: « convert to camelCase
+    ;;      snake: « convert to snake_case
+    ;;      kebab: « convert to kebab-case
+    ;; ]
+    ;; returns: :string
+    ;; example: {
+    ;;      recase.snake "This is an example"
+    ;;      ; => "this_is_an_example"
+    ;;
+    ;;      recase.camel "Print SQL"
+    ;;      ; => "printSQL"
+    ;; }
     ret: str
 
     unless null? attr 'title -> ret: _titleCase ret
