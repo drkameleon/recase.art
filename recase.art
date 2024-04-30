@@ -31,7 +31,7 @@ export module [
         
         return map prepared 'word [
             (\allCaps? word)? -> word
-                            -> lower word
+                              -> lower word
         ]
     ]
 
@@ -42,7 +42,7 @@ export module [
     camelCase: method [s][
         join map.with:'i \separated s 'x [
             (i=0)? -> x
-                -> capitalize x
+                   -> capitalize x
         ]
     ]
 
