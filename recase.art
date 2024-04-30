@@ -92,10 +92,9 @@ export module [
 if standalone? ::
     loop ["This is       an example", "ThisIsAnExample", "this345_is_an_example", "printSQL", "ДоброЈутро"] 'str [
         print ["String is:" str]
-        print ["Separated:" join.with:", " separated str]
-        print ["Camel case:" camelCase str]
-        print ["Title case:" titleCase str]
-        print ["Kebab case:" kebabCase str]
-        print ["Snake case:" snakeCase str]
+        print ["Camel case:" recase.camel str]
+        print ["Title case:" recase.title str]
+        print ["Kebab case:" recase.kebab str]
+        print ["Snake case:" recase.snake str]
         print "----"
     ]
