@@ -8,80 +8,82 @@
 ; (c) 2024 Yanis Zafirópulos
 ;===============================================
 
-;---------------------------
-; Helpers
-;---------------------------
+export module [
+    ;---------------------------
+    ; Helpers
+    ;---------------------------
 
-_allCaps?: function [s][
-    and? 1 < size s
-         every? s 'ch -> or? [upper? ch]
-                             [numeric? ch]
-]
-
-_separated: function [s][
-    ; crazy regex credit:
-    ; https://stackoverflow.com/a/62527131/1270812
-    prepared: s | replace {/(*UTF8)([^[\p{L}\d]+|(?<=[\p{Ll}\d])(?=\p{Lu})|(?<=\p{Lu})(?=\p{Lu}[\p{Ll}\d])|(?<=[\p{L}\d])(?=\p{Lu}[\p{Ll}\d]))/} " "
-                | split.words
-    
-    return map prepared 'word [
-        (_allCaps? word)? -> word
-                         -> lower word
+    allCaps?: function [s][
+        and? 1 < size s
+            every? s 'ch -> or? [upper? ch]
+                                [numeric? ch]
     ]
-]
 
-;---------------------------
-; Private methods
-;---------------------------
+    ;---------------------------
+    ; Private methods
+    ;---------------------------
 
-_titleCase: function [s][
-    join map _separated s => capitalize
-]
-
-_camelCase: function [s][
-    join map.with:'i _separated s 'x [
-        (i=0)? -> x
-               -> capitalize x
+    separated: method [s][
+        ; crazy regex credit:
+        ; https://stackoverflow.com/a/62527131/1270812
+        prepared: s | replace {/(*UTF8)([^[\p{L}\d]+|(?<=[\p{Ll}\d])(?=\p{Lu})|(?<=\p{Lu})(?=\p{Lu}[\p{Ll}\d])|(?<=[\p{L}\d])(?=\p{Lu}[\p{Ll}\d]))/} " "
+                    | split.words
+        
+        return map prepared 'word [
+            (\allCaps? word)? -> word
+                            -> lower word
+        ]
     ]
-]
 
-_snakeCase: function [s][
-    join.with:"_" _separated s
-]
+    titleCase: method [s][
+        join map \separated s => capitalize
+    ]
 
-_kebabCase: function [s][
-    join.with:"-" _separated s
-]
+    camelCase: method [s][
+        join map.with:'i \separated s 'x [
+            (i=0)? -> x
+                -> capitalize x
+        ]
+    ]
 
-;---------------------------
-; Public methods
-;---------------------------
+    snakeCase: method [s][
+        join.with:"_" \separated s
+    ]
 
-recase: function [str :string][
-    ;; description: « convert case of given string
-    ;; options: [
-    ;;      title: « convert to TitleCase
-    ;;      camel: « convert to camelCase
-    ;;      snake: « convert to snake_case
-    ;;      kebab: « convert to kebab-case
-    ;; ]
-    ;; returns: :string
-    ;; example: {
-    ;;      recase.snake "This is an example"
-    ;;      ; => "this_is_an_example"
-    ;;
-    ;;      recase.camel "Print SQL"
-    ;;      ; => "printSQL"
-    ;; }
-    ret: str
+    kebabCase: method [s][
+        join.with:"-" \separated s
+    ]
 
-    unless null? attr 'title -> ret: _titleCase ret
-    unless null? attr 'camel -> ret: _camelCase ret
-    unless null? attr 'snake -> ret: _snakeCase ret
-    unless null? attr 'kebab -> ret: _kebabCase ret
-    
-    return ret
-]
+    ;---------------------------
+    ; Public methods
+    ;---------------------------
+
+    recase: method.public [str :string][
+        ;; description: « convert case of given string
+        ;; options: [
+        ;;      title: « convert to TitleCase
+        ;;      camel: « convert to camelCase
+        ;;      snake: « convert to snake_case
+        ;;      kebab: « convert to kebab-case
+        ;; ]
+        ;; returns: :string
+        ;; example: {
+        ;;      recase.snake "This is an example"
+        ;;      ; => "this_is_an_example"
+        ;;
+        ;;      recase.camel "Print SQL"
+        ;;      ; => "printSQL"
+        ;; }
+        ret: str
+
+        unless null? attr 'title -> ret: \titleCase ret
+        unless null? attr 'camel -> ret: \camelCase ret
+        unless null? attr 'snake -> ret: \snakeCase ret
+        unless null? attr 'kebab -> ret: \kebabCase ret
+        
+        return ret
+    ]
+]!
 
 ;---------------------------
 ; Testing
