@@ -54,6 +54,10 @@ export module [
         join.with:"-" \separated s
     ]
 
+    plainCase: method [s][
+        join.with:" " \separated s
+    ]
+
     ;---------------------------
     ; Public methods
     ;---------------------------
@@ -65,6 +69,7 @@ export module [
         ;;      camel: « convert to camelCase
         ;;      snake: « convert to snake_case
         ;;      kebab: « convert to kebab-case
+        ;;      plain: « convert to plain case
         ;; ]
         ;; returns: :string
         ;; example: {
@@ -80,6 +85,7 @@ export module [
         unless null? attr 'camel -> ret: \camelCase ret
         unless null? attr 'snake -> ret: \snakeCase ret
         unless null? attr 'kebab -> ret: \kebabCase ret
+        unless null? attr 'plain -> ret: \plainCase ret
         
         return ret
     ]
@@ -96,5 +102,6 @@ if standalone? ::
         print ["Title case:" recase.title str]
         print ["Kebab case:" recase.kebab str]
         print ["Snake case:" recase.snake str]
+        print ["Plain case:" recase.plain str]
         print "----"
     ]
