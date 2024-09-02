@@ -30,6 +30,7 @@ This package provides an function (`recase`) that allows to convert to and from 
 - camelCase
 - snake_case
 - kebab-case
+- plain case
 
 > [!IMPORTANT]
 > All whitespace within the string will be stripped, to allow for a more efficient "word" separation.
@@ -70,6 +71,7 @@ convert case of given string
 | camel |  | convert to camelCase | 
 | snake |  | convert to snake_case | 
 | kebab |  | convert to kebab-case | 
+| plain |  | convert to plain case |
 
 ##### Returns
 
