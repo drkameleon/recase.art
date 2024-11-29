@@ -92,7 +92,13 @@ export module [
 ;---------------------------
 
 if standalone? ::
-    loop ["This is       an example", "ThisIsAnExample", "this345_is_an_example", "printSQL", "ДоброЈутро"] 'str [
+    loop [
+        "This is       an example"
+        "ThisIsAnExample"
+        "this345_is_an_example"
+        "printSQL"
+        "ДоброЈутро"
+    ] 'str [
         print ["String is:" str]
         print ["Camel case:" recase.camel str]
         print ["Title case:" recase.title str]
