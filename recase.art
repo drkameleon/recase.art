@@ -46,16 +46,8 @@ export module [
         ]
     ]
 
-    snakeCase: method [s][
-        join.with:"_" \separated s
-    ]
-
-    kebabCase: method [s][
-        join.with:"-" \separated s
-    ]
-
-    plainCase: method [s][
-        join.with:" " \separated s
+    withSeparator: method [s,sep][
+        join.with:sep \separated s
     ]
 
     ;---------------------------
@@ -70,6 +62,7 @@ export module [
         ;;      snake: « convert to snake_case
         ;;      kebab: « convert to kebab-case
         ;;      plain: « convert to plain case
+        ;;      custom: :char :string « use custom separator
         ;; ]
         ;; returns: :string
         ;; example: {
@@ -83,9 +76,12 @@ export module [
 
         unless null? attr 'title -> ret: \titleCase ret
         unless null? attr 'camel -> ret: \camelCase ret
-        unless null? attr 'snake -> ret: \snakeCase ret
-        unless null? attr 'kebab -> ret: \kebabCase ret
-        unless null? attr 'plain -> ret: \plainCase ret
+        unless null? attr 'snake -> ret: \withSeparator ret "_"
+        unless null? attr 'kebab -> ret: \withSeparator ret "-"
+        unless null? attr 'plain -> ret: \withSeparator ret " "
+        
+        if customSep: <= attr 'custom ->
+            ret: \withSeparator ret customSep
         
         return ret
     ]
@@ -103,5 +99,6 @@ if standalone? ::
         print ["Kebab case:" recase.kebab str]
         print ["Snake case:" recase.snake str]
         print ["Plain case:" recase.plain str]
+        print ["Custom case:" recase.custom:"--" str]
         print "----"
     ]
