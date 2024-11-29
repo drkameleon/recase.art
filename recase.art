@@ -74,11 +74,11 @@ export module [
         ;; }
         ret: str
 
-        unless null? attr 'title -> ret: \titleCase ret
-        unless null? attr 'camel -> ret: \camelCase ret
-        unless null? attr 'snake -> ret: \withSeparator ret "_"
-        unless null? attr 'kebab -> ret: \withSeparator ret "-"
-        unless null? attr 'plain -> ret: \withSeparator ret " "
+        if attr 'title -> ret: \titleCase ret
+        if attr 'camel -> ret: \camelCase ret
+        if attr 'snake -> ret: \withSeparator ret "_"
+        if attr 'kebab -> ret: \withSeparator ret "-"
+        if attr 'plain -> ret: \withSeparator ret " "
         
         if customSep: <= attr 'custom ->
             ret: \withSeparator ret customSep
