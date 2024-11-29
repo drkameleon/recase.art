@@ -72,6 +72,7 @@ convert case of given string
 | snake |  | convert to snake_case | 
 | kebab |  | convert to kebab-case | 
 | plain |  | convert to plain case |
+| custom: | `:char` `:string` | use custom separator | 
 
 ##### Returns
 
