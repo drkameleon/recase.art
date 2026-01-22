@@ -30,6 +30,7 @@ This package provides an function (`recase`) that allows to convert to and from 
 - camelCase
 - snake_case
 - kebab-case
+- dot.case
 - plain case
 
 > [!IMPORTANT]
@@ -70,7 +71,8 @@ convert case of given string
 | title |  | convert to TitleCase | 
 | camel |  | convert to camelCase | 
 | snake |  | convert to snake_case | 
-| kebab |  | convert to kebab-case | 
+| kebab |  | convert to kebab-case |
+| dot |  | convert to dot.case |
 | plain |  | convert to plain case |
 | custom: | `:char` `:string` | use custom separator | 
 
