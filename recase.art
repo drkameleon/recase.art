@@ -61,6 +61,7 @@ export module [
         ;;      camel: « convert to camelCase
         ;;      snake: « convert to snake_case
         ;;      kebab: « convert to kebab-case
+        ;;      dot:   « convert to dot.case
         ;;      plain: « convert to plain case
         ;;      custom: :char :string « use custom separator
         ;; ]
@@ -78,6 +79,7 @@ export module [
         if attr 'camel -> ret: \camelCase ret
         if attr 'snake -> ret: \withSeparator ret "_"
         if attr 'kebab -> ret: \withSeparator ret "-"
+        if attr 'dot   -> ret: \withSeparator ret "."
         if attr 'plain -> ret: \withSeparator ret " "
         
         if customSep: <= attr 'custom ->
@@ -103,6 +105,7 @@ if standalone? ::
         print ["Camel case:" recase.camel str]
         print ["Title case:" recase.title str]
         print ["Kebab case:" recase.kebab str]
+        print ["Dot case:" recase.dot str]
         print ["Snake case:" recase.snake str]
         print ["Plain case:" recase.plain str]
         print ["Custom case:" recase.custom:"--" str]
