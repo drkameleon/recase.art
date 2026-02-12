@@ -31,6 +31,7 @@ This package provides an function (`recase`) that allows to convert to and from 
 - snake_case
 - kebab-case
 - dot.case
+- Train-Case
 - plain case
 
 > [!IMPORTANT]
@@ -73,6 +74,7 @@ convert case of given string
 | snake |  | convert to snake_case | 
 | kebab |  | convert to kebab-case |
 | dot |  | convert to dot.case |
+| train | | convert to Train-Case |
 | plain |  | convert to plain case |
 | custom: | `:char` `:string` | use custom separator | 
 

@@ -39,6 +39,10 @@ export module [
         join map \separated s => capitalize
     ]
 
+    trainCase: method [s][
+        join.with:'-' map \separated s => capitalize
+    ]
+
     camelCase: method [s][
         join map.with:'i \separated s 'x [
             (i=0)? -> x
@@ -63,6 +67,7 @@ export module [
         ;;      kebab: « convert to kebab-case
         ;;      dot:   « convert to dot.case
         ;;      plain: « convert to plain case
+        ;;      train: « convert to Train-Case
         ;;      custom: :char :string « use custom separator
         ;; ]
         ;; returns: :string
@@ -81,6 +86,7 @@ export module [
         if attr 'kebab -> ret: \withSeparator ret "-"
         if attr 'dot   -> ret: \withSeparator ret "."
         if attr 'plain -> ret: \withSeparator ret " "
+        if attr 'train -> ret: \trainCase ret
         
         if customSep: <= attr 'custom ->
             ret: \withSeparator ret customSep
@@ -107,6 +113,7 @@ if standalone? ::
         print ["Kebab case:" recase.kebab str]
         print ["Dot case:" recase.dot str]
         print ["Snake case:" recase.snake str]
+        print ["Train case:" recase.train str]
         print ["Plain case:" recase.plain str]
         print ["Custom case:" recase.custom:"--" str]
         print "----"
